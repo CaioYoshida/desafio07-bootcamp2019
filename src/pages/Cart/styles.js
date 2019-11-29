@@ -7,8 +7,9 @@ export const Container = styled.View`
   flex-direction: column;
 `;
 
-export const CartContainer = styled.View`
+export const CartContainer = styled.ScrollView`
   background-color: #fff;
+  height: 200px;
   border-radius: 4px;
   padding: 10px;
 `;
@@ -101,4 +102,11 @@ export const EndCartButton = styled.TouchableOpacity`
   padding: 10px;
   justify-content: center;
   align-items: center;
+`;
+
+export const EmptyCart = styled.View`
+  background-color: #fff;
+  height: 100px;
+  border-radius: 4px;
+  padding: 10px;
 `;
