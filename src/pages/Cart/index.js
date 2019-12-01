@@ -30,6 +30,15 @@ import {
 class Cart extends Component {
   componentDidMount() {}
 
+  handleRemoveItem = item => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      id: item.id,
+    });
+  };
+
   render() {
     const { cart } = this.props;
     console.log(cart);
@@ -47,7 +56,7 @@ class Cart extends Component {
                       <ItemTitle>{item.title}</ItemTitle>
                       <ItemPrice>{item.formattedPrice}</ItemPrice>
                     </ItemDescriptions>
-                    <DeleteItemContainer>
+                    <DeleteItemContainer onPress={() => this.handleRemoveItem(item)}>
                       <Icon name="delete-forever" color="#7159c1" size={28} />
                     </DeleteItemContainer>
                   </ItemContainer>
@@ -60,7 +69,7 @@ class Cart extends Component {
                           size={24}
                         />
                       </IconButton>
-                      <AmountInput>{1}</AmountInput>
+                      <AmountInput>{item.amount}</AmountInput>
                       <IconButton>
                         <Icon
                           name="add-circle-outline"
@@ -69,7 +78,7 @@ class Cart extends Component {
                         />
                       </IconButton>
                     </AmountContainer>
-                    <Subtotal>{item.formattedPrice}</Subtotal>
+                    <Subtotal>{item.subtotal}</Subtotal>
                   </ItemAmount>
                 </CartItem>
               ))}
@@ -98,6 +107,7 @@ const mapStateToProps = state => ({
   cart: state.cart.map(item => ({
     ...item,
     formattedPrice: formatPrice(item.price),
+    subtotal: formatPrice(item.amount * item.price),
   })),
 });
 
