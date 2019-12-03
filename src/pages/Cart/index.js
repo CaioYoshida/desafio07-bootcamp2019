@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Text, Flatlist } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { formatPrice } from '../../util/format';
+
+import * as CartActions from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -31,12 +34,9 @@ class Cart extends Component {
   componentDidMount() {}
 
   handleRemoveItem = item => {
-    const { dispatch } = this.props;
+    const { removeFromCart } = this.props;
 
-    dispatch({
-      type: 'REMOVE_FROM_CART',
-      id: item.id,
-    });
+    removeFromCart(item);
   };
 
   render() {
@@ -111,4 +111,7 @@ const mapStateToProps = state => ({
   })),
 });
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
