@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Text, Flatlist } from 'react-native';
+import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { formatPrice } from '../../util/format';
@@ -37,13 +37,13 @@ class Cart extends Component {
     const { updateAmount } = this.props;
 
     updateAmount(item.id, item.amount + 1);
-  }
+  };
 
   decrementAmount = item => {
     const { updateAmount } = this.props;
 
     updateAmount(item.id, item.amount - 1);
-  }
+  };
 
   handleRemoveItem = item => {
     const { removeFromCart } = this.props;
@@ -67,7 +67,9 @@ class Cart extends Component {
                       <ItemTitle>{item.title}</ItemTitle>
                       <ItemPrice>{item.formattedPrice}</ItemPrice>
                     </ItemDescriptions>
-                    <DeleteItemContainer onPress={() => this.handleRemoveItem(item)}>
+                    <DeleteItemContainer
+                      onPress={() => this.handleRemoveItem(item)}
+                    >
                       <Icon name="delete-forever" color="#7159c1" size={28} />
                     </DeleteItemContainer>
                   </ItemContainer>
@@ -120,9 +122,11 @@ const mapStateToProps = state => ({
     formattedPrice: formatPrice(item.price),
     subtotal: formatPrice(item.amount * item.price),
   })),
-  total: formatPrice(state.cart.reduce((total, item) => {
-    return total + item.amount * item.price;
-  }, 0))
+  total: formatPrice(
+    state.cart.reduce((total, item) => {
+      return total + item.amount * item.price;
+    }, 0)
+  ),
 });
 
 const mapDispatchToProps = dispatch =>
