@@ -33,6 +33,18 @@ import {
 class Cart extends Component {
   componentDidMount() {}
 
+  incrementAmount = item => {
+    const { updateAmount } = this.props;
+
+    updateAmount(item.id, item.amount + 1);
+  }
+
+  decrementAmount = item => {
+    const { updateAmount } = this.props;
+
+    updateAmount(item.id, item.amount - 1);
+  }
+
   handleRemoveItem = item => {
     const { removeFromCart } = this.props;
 
@@ -40,8 +52,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { cart } = this.props;
-    console.log(cart);
+    const { cart, total } = this.props;
 
     return (
       <Container>
@@ -62,7 +73,7 @@ class Cart extends Component {
                   </ItemContainer>
                   <ItemAmount>
                     <AmountContainer>
-                      <IconButton>
+                      <IconButton onPress={() => this.decrementAmount(item)}>
                         <Icon
                           name="remove-circle-outline"
                           color="#7159c1"
@@ -70,7 +81,7 @@ class Cart extends Component {
                         />
                       </IconButton>
                       <AmountInput>{item.amount}</AmountInput>
-                      <IconButton>
+                      <IconButton onPress={() => this.incrementAmount(item)}>
                         <Icon
                           name="add-circle-outline"
                           color="#7159c1"
@@ -84,7 +95,7 @@ class Cart extends Component {
               ))}
               <Total>
                 <TotalText>TOTAL</TotalText>
-                <TotalPrice>{1000}</TotalPrice>
+                <TotalPrice>{total}</TotalPrice>
               </Total>
               <EndCartButton>
                 <Text style={{ fontWeight: 'bold', color: '#FFF' }}>
@@ -109,6 +120,9 @@ const mapStateToProps = state => ({
     formattedPrice: formatPrice(item.price),
     subtotal: formatPrice(item.amount * item.price),
   })),
+  total: formatPrice(state.cart.reduce((total, item) => {
+    return total + item.amount * item.price;
+  }, 0))
 });
 
 const mapDispatchToProps = dispatch =>

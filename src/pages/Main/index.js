@@ -60,7 +60,7 @@ class Main extends Component {
               <AddProductButton onPress={() => this.handleAddProduct(item)}>
                 <ButtonArea>
                   <Icon name="add-shopping-cart" color="#FFF" size={24} />
-                  <ProductAmountText>{0}</ProductAmountText>
+                  <ProductAmountText>{item.amount || 0}</ProductAmountText>
                 </ButtonArea>
                 <ButtonText>ADICIONAR</ButtonText>
               </AddProductButton>
