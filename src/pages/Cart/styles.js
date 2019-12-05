@@ -117,3 +117,13 @@ export const EmptyCartText = styled.Text`
   align-self: center;
   font-weight: bold;
 `;
+
+export const KeepShoppingButton = styled.TouchableOpacity`
+  background-color: #77dd77;
+  height: 50px;
+  border-radius: 4px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+`;

@@ -29,6 +29,7 @@ import {
   EndCartButton,
   EmptyCart,
   EmptyCartText,
+  KeepShoppingButton,
 } from './styles';
 
 class Cart extends Component {
@@ -100,9 +101,14 @@ class Cart extends Component {
                 <TotalText>TOTAL</TotalText>
                 <TotalPrice>{total}</TotalPrice>
               </Total>
+              <KeepShoppingButton onPress={() => navigation.navigate('Main')}>
+                <Text style={{ fontWeight: 'bold', color: '#FFF' }}>
+                  KEEP SHOPPING
+                </Text>
+              </KeepShoppingButton>
               <EndCartButton>
                 <Text style={{ fontWeight: 'bold', color: '#FFF' }}>
-                  FINALIZAR PEDIDO
+                  CART CHECK OUT
                 </Text>
               </EndCartButton>
             </CartContainer>
