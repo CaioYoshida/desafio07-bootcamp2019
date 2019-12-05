@@ -102,11 +102,18 @@ export const EndCartButton = styled.TouchableOpacity`
   padding: 10px;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 export const EmptyCart = styled.View`
   background-color: #fff;
-  height: 100px;
   border-radius: 4px;
   padding: 10px;
+`;
+
+export const EmptyCartText = styled.Text`
+  font-size: 25px;
+  padding: 25px;
+  align-self: center;
+  font-weight: bold;
 `;

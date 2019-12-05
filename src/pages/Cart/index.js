@@ -28,21 +28,22 @@ import {
   TotalPrice,
   EndCartButton,
   EmptyCart,
+  EmptyCartText,
 } from './styles';
 
 class Cart extends Component {
   componentDidMount() {}
 
   incrementAmount = item => {
-    const { updateAmount } = this.props;
+    const { updateAmountRequest } = this.props;
 
-    updateAmount(item.id, item.amount + 1);
+    updateAmountRequest(item.id, item.amount + 1);
   };
 
   decrementAmount = item => {
-    const { updateAmount } = this.props;
+    const { updateAmountRequest } = this.props;
 
-    updateAmount(item.id, item.amount - 1);
+    updateAmountRequest(item.id, item.amount - 1);
   };
 
   handleRemoveItem = item => {
@@ -52,7 +53,7 @@ class Cart extends Component {
   };
 
   render() {
-    const { cart, total } = this.props;
+    const { cart, total, navigation } = this.props;
 
     return (
       <Container>
@@ -108,7 +109,16 @@ class Cart extends Component {
           </>
         ) : (
           <>
-            <EmptyCart />
+            <EmptyCart>
+              <EmptyCartText>Empty Cart</EmptyCartText>
+              <EndCartButton onPress={() => navigation.navigate('Main')}>
+                <Text
+                  style={{ fontWeight: 'bold', color: '#FFF', fontSize: 20 }}
+                >
+                  Back To Shopping List
+                </Text>
+              </EndCartButton>
+            </EmptyCart>
           </>
         )}
       </Container>

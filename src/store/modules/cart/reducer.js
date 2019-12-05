@@ -4,20 +4,9 @@ export default function cart(state = [], action) {
   switch (action.type) {
     case '@cart/ADD_SUCCESS':
       return produce(state, draft => {
-        const productAlreadyExists = draft.findIndex(
-          p => p.id === action.item.id
-        );
+        const { item } = action;
 
-        // we don't use just if(productAlreadyExists) beacause...
-        // ...productAlreadyExists represents an index which could be zero
-        if (productAlreadyExists >= 0) {
-          draft[productAlreadyExists].amount += 1;
-        } else {
-          draft.push({
-            ...action.item,
-            amount: 1,
-          });
-        }
+        draft.push(item);
       });
     case '@cart/REMOVE':
       return produce(state, draft => {
@@ -27,7 +16,7 @@ export default function cart(state = [], action) {
           draft.splice(productIndex, 1);
         }
       });
-    case '@cart/UPDATE_AMOUNT':
+    case '@cart/UPDATE_AMOUNT_SUCCESS':
       return produce(state, draft => {
         const productIndex = draft.findIndex(p => p.id === action.id);
 
